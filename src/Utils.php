@@ -39,4 +39,9 @@ class Utils
 		}
 		return $body;
 	}
+
+	public static function camelize(string $input, string $separator = '_'): string
+	{
+		return str_replace($separator, '', lcfirst(ucwords($input, $separator)));
+	}
 }
