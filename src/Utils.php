@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace DJTommek\MapyCzApi;
+namespace DJTommek\GlympseApi;
 
 class Utils
 {
