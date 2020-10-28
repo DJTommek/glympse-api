@@ -20,7 +20,8 @@
 	"require": {
         "php": ">=7.3.0",
 		"ext-curl": "*",
-		"ext-simplexml": "*"
+		"ext-json": "*",
+		"ext-mbstring": "*"
 	},
 	"require-dev": {
 		"phpunit/phpunit": "^9",
