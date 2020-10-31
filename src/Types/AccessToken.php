@@ -2,6 +2,7 @@
 
 namespace DJTommek\GlympseApi\Types;
 
+use DJTommek\GlympseApi\DateImmutableUtils;
 use DJTommek\GlympseApi\Utils;
 
 /**
@@ -19,6 +20,8 @@ class AccessToken extends Type
 			$propertyName = Utils::camelize($key);
 			if ($key === 'expires_in') {
 				$value = new \DateInterval(sprintf('PT%dS', $value));
+			} else if ($key === 'account_created') {
+				$value = DateImmutableUtils::fromTimestampMs($value);
 			}
 			$class->{$propertyName} = $value;
 		}
@@ -34,4 +37,6 @@ class AccessToken extends Type
 	public $expiresIn = null;
 	/** @var ?string */
 	public $config = null;
+	/** @var ?\DateTimeImmutable */
+	public $accountCreated = null;
 }
