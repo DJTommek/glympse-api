@@ -26,7 +26,6 @@ class RequestClient
 		if ($authorization) {
 			$headers[] = 'Authorization: Bearer ' . $authorization;
 		}
-		dump($body);
 		$response = Utils::fileGetContents($url, [
 			CURLOPT_POST => true,
 			CURLOPT_POSTFIELDS => $body,
@@ -36,7 +35,6 @@ class RequestClient
 		if ($content->result === 'ok') {
 			return $content->response;
 		} else {
-			dump($content);
 			throw new \Exception($content->meta->error_detail ?? $content->meta->error);
 		}
 	}
@@ -45,7 +43,7 @@ class RequestClient
 	{
 		$url = sprintf('%s%s?%s', self::API_URL, $path, http_build_query($queryParams));
 		$headers = [
-//			'Content-type: application/json',
+			'Content-type: application/json',
 		];
 		if ($authorization) {
 			$headers[] = 'Authorization: Bearer ' . $authorization;
