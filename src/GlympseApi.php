@@ -3,10 +3,13 @@
 namespace DJTommek\GlympseApi;
 
 use DJTommek\GlympseApi\Types\AccessToken;
+use DJTommek\GlympseApi\Types\Account;
 
 class GlympseApi
 {
+	/** @var ?string */
 	private $apiUsername;
+	/** @var ?string */
 	private $apiPassword;
 	/** @var string */
 	private $apiKey;
@@ -46,7 +49,7 @@ class GlympseApi
 		$this->apiPassword = $password;
 	}
 
-	public function accountCreate(string $type = null, string $address = null, string $code = null)
+	public function accountCreate(string $type = null, string $address = null, string $code = null): Account
 	{
 		$params = [
 			'api_key' => $this->apiKey,
@@ -58,7 +61,8 @@ class GlympseApi
 			$body['address'] = $address;
 			$body['code'] = $code;
 		}
-		return $this->requestClient->makePostRequest(Endpoint::ACCOUNT_CREATE, $params, $body);
+		$response = $this->requestClient->makePostRequest(Endpoint::ACCOUNT_CREATE, $params, $body);
+		return Account::createFromVariable($response);
 	}
 
 	/**
