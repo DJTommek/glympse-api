@@ -28,7 +28,7 @@ class GlympseApi
 		$this->requestClient = new RequestClient();
 	}
 
-	public function setAccessToken(string $token)
+	public function setAccessToken(AccessToken $token)
 	{
 		$this->accessToken = $token;
 	}
@@ -68,7 +68,7 @@ class GlympseApi
 	/**
 	 * @param ?string $device Unique device id for this physical device
 	 */
-	public function accountLogin(string $device = null)
+	public function accountLogin(string $device = null): AccessToken
 	{
 		$params = [
 			'api_key' => $this->apiKey,
@@ -78,7 +78,8 @@ class GlympseApi
 		if (is_null($device) === false) {
 			$params['device'] = $device;
 		}
-		return $this->requestClient->makePostRequest(Endpoint::ACCOUNT_LOGIN, $params);
+		$response = $this->requestClient->makePostRequest(Endpoint::ACCOUNT_LOGIN, $params);
+		return AccessToken::createFromVariable($response);
 	}
 
 	public function usersSelfCreateTicket(int $duration)
@@ -86,7 +87,7 @@ class GlympseApi
 		$params = [
 			'duration' => $duration,
 		];
-		return $this->requestClient->makePostRequest(Endpoint::USERS_SELF_CREATE_TICKET, $params, [], $this->accessToken);
+		return $this->requestClient->makePostRequest(Endpoint::USERS_SELF_CREATE_TICKET, $params, [], $this->accessToken->accessToken);
 	}
 
 	public function ticketsId(string $ticketId, bool $invites = null, bool $properties = null)
@@ -99,7 +100,7 @@ class GlympseApi
 			$params['properties'] = $properties;
 		}
 		$endpoint = sprintf(Endpoint::TICKETS_ID_UPDATE, $ticketId);
-		return $this->requestClient->makeGetRequest($endpoint, $params, $this->accessToken);
+		return $this->requestClient->makeGetRequest($endpoint, $params, $this->accessToken->accessToken);
 	}
 
 	/**
@@ -131,7 +132,7 @@ class GlympseApi
 		if (is_null($limit) === false) {
 			$params['limit'] = $limit;
 		}
-		return $this->requestClient->makeGetRequest(Endpoint::USERS_SELF_TICKETS, $params, $this->accessToken);
+		return $this->requestClient->makeGetRequest(Endpoint::USERS_SELF_TICKETS, $params, $this->accessToken->accessToken);
 	}
 
 	public function ticketsIdUpdate(string $ticketId, int $duration)
@@ -140,7 +141,7 @@ class GlympseApi
 			'duration' => $duration,
 		];
 		$endpoint = sprintf(Endpoint::TICKETS_ID_UPDATE, $ticketId);
-		return $this->requestClient->makePostRequest($endpoint, $params, [], $this->accessToken);
+		return $this->requestClient->makePostRequest($endpoint, $params, [], $this->accessToken->accessToken);
 	}
 
 	public function ticketsIdCreateInvite(
@@ -184,7 +185,7 @@ class GlympseApi
 			$params['data'] = $data;
 		}
 		$endpoint = sprintf(Endpoint::TICKETS_ID_CREATE_INVITE, $ticketId);
-		return $this->requestClient->makePostRequest($endpoint, $params, [], $this->accessToken);
+		return $this->requestClient->makePostRequest($endpoint, $params, [], $this->accessToken->accessToken);
 	}
 
 	public function ticketsIdAppendLocation(
@@ -210,6 +211,6 @@ class GlympseApi
 			$verticalAccuracy
 		];
 		$endpoint = sprintf(Endpoint::TICKETS_ID_APPEND_LOCATION, $ticketId);
-		return $this->requestClient->makePostRequest($endpoint, [], json_encode([$params]), $this->accessToken);
+		return $this->requestClient->makePostRequest($endpoint, [], json_encode([$params]), $this->accessToken->accessToken);
 	}
 }
