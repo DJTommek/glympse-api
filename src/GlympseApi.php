@@ -4,6 +4,7 @@ namespace DJTommek\GlympseApi;
 
 use DJTommek\GlympseApi\Types\AccessToken;
 use DJTommek\GlympseApi\Types\Account;
+use DJTommek\GlympseApi\Types\Tickets;
 
 class GlympseApi
 {
@@ -132,7 +133,8 @@ class GlympseApi
 		if (is_null($limit) === false) {
 			$params['limit'] = Utils::stringify($limit);
 		}
-		return $this->requestClient->makeGetRequest(Endpoint::USERS_SELF_TICKETS, $params, $this->accessToken->accessToken);
+		$response = $this->requestClient->makeGetRequest(Endpoint::USERS_SELF_TICKETS, $params, $this->accessToken->accessToken);
+		return Tickets::createFromVariable($response);
 	}
 
 	public function ticketsIdUpdate(string $ticketId, int $duration)
