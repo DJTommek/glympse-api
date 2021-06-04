@@ -94,10 +94,10 @@ class GlympseApi
 	{
 		$params = [];
 		if ($invites) {
-			$params['invites'] = $invites;
+			$params['invites'] = Utils::stringify($invites);
 		}
 		if ($properties) {
-			$params['properties'] = $properties;
+			$params['properties'] = Utils::stringify($properties);
 		}
 		$endpoint = sprintf(Endpoint::TICKETS_ID_UPDATE, $ticketId);
 		return $this->requestClient->makeGetRequest($endpoint, $params, $this->accessToken->accessToken);
@@ -111,26 +111,26 @@ class GlympseApi
 	 * @param ?\DateTimeInterface $minEndTime Results are limited to those ending after the specified Epoch time.
 	 * @param ?int $limit Limits the response to the number specified as the value.
 	 */
-	public function usersSelfTickets(bool $invites = null, bool $properties = null, bool $siblings = null, string $state = null, \DateTimeInterface $minEndTime = null, int $limit = null)
+	public function usersSelfTickets(bool $invites = null, bool $properties = null, bool $siblings = null, string $state = null, \DateTimeInterface $minEndTime = null, int $limit = null): Tickets
 	{
 		$params = [];
 		if (is_null($invites) === false) {
-			$params['invites'] = $invites;
+			$params['invites'] = Utils::stringify($invites);
 		}
 		if (is_null($properties) === false) {
-			$params['properties'] = $properties;
+			$params['properties'] = Utils::stringify($properties);
 		}
 		if (is_null($siblings) === false) {
-			$params['siblings'] = $siblings;
+			$params['siblings'] = Utils::stringify($siblings);
 		}
 		if (is_null($state) === false) {
-			$params['state'] = $state;
+			$params['state'] = Utils::stringify($state);
 		}
 		if (is_null($minEndTime) === false) {
-			$params['min_end_time'] = $minEndTime;
+			$params['min_end_time'] = Utils::stringify($minEndTime);
 		}
 		if (is_null($limit) === false) {
-			$params['limit'] = $limit;
+			$params['limit'] = Utils::stringify($limit);
 		}
 		return $this->requestClient->makeGetRequest(Endpoint::USERS_SELF_TICKETS, $params, $this->accessToken->accessToken);
 	}

@@ -44,4 +44,18 @@ class Utils
 	{
 		return str_replace($separator, '', lcfirst(ucwords($input, $separator)));
 	}
+
+	/**
+	 * Convert any input to it's stringify value as Glympse API is expecting
+	 *
+	 * @param string|bool $input
+	 */
+	public static function stringify($input): string {
+		if (is_bool($input)) {
+			return $input ? 'true' : 'false';
+		}
+		// @TODO add support for datetime to UNIX timestamp in milliseconds
+		// @TODO add support for duration as DateInterval to milliseconds
+		return $input;
+	}
 }
