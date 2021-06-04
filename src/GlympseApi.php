@@ -4,6 +4,7 @@ namespace DJTommek\GlympseApi;
 
 use DJTommek\GlympseApi\Types\AccessToken;
 use DJTommek\GlympseApi\Types\Account;
+use DJTommek\GlympseApi\Types\Invites;
 use DJTommek\GlympseApi\Types\Tickets;
 
 class GlympseApi
@@ -215,4 +216,38 @@ class GlympseApi
 		$endpoint = sprintf(Endpoint::TICKETS_ID_APPEND_LOCATION, $ticketId);
 		return $this->requestClient->makePostRequest($endpoint, [], json_encode([$params]), $this->accessToken->accessToken);
 	}
+
+	/**
+	 * Returns a list of invites created by the user.
+	 *
+	 * @param ?int $since Returns the invites that have been viewed since the specified Epoch time in milliseconds. To see all invites created by a user, set since to zero (0). @TODO change to DateTimeImmutable
+	 * @param ?bool $onlyViews When true, invite responses contain just identifying details and view data (default: false).
+	 * @param ?bool $expired When true, the response includes expired tickets. When false (default), only active ticket invites are reported.
+	 * @param ?bool $siblings When true, reports sibling tickets associated with each ticket (default: false).
+	 * @param ?bool $viewers When true, response includes detailed viewer information (default: false).
+	 *
+	 * @see https://developer.glympse.com/docs/core/api/reference/users/self/invites/get
+	 */
+	public function usersSelfInvites(int $since = null, bool $onlyViews = null, bool $expired = null, bool $siblings = null, bool $viewers = null): Invites
+	{
+		$params = [];
+		if (is_null($since) === false) {
+			$params['since'] = $since;
+		}
+		if (is_null($onlyViews) === false) {
+			$params['only_views'] = Utils::stringify($onlyViews);
+		}
+		if (is_null($expired) === false) {
+			$params['expired'] = Utils::stringify($expired);
+		}
+		if (is_null($siblings) === false) {
+			$params['siblings'] = Utils::stringify($siblings);
+		}
+		if (is_null($viewers) === false) {
+			$params['viewers'] = Utils::stringify($viewers);
+		}
+		$response = $this->requestClient->makeGetRequest(Endpoint::USERS_SELF_INVITES, $params, $this->accessToken->accessToken);
+		return Invites::createFromVariable($response);
+	}
+
 }

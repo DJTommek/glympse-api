@@ -45,13 +45,11 @@ class Invites extends Type
 	/** @var \DateTimeImmutable */
 	public $lastRefresh = null;
 
-//	/** @var ?int */
-//	// @TODO add support for this
-//	public $postRate = null;
-//
-//	/** @var ?bool */
-//	// @TODO add support for this
-//	public $postRateIsHigh = null;
+	/** @var ?int */
+	public $postRate = null;
+
+	/** @var ?bool */
+	public $postRateIsHigh = null;
 
 	// @TODO add support for meta
 }
