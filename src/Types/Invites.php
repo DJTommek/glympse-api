@@ -30,6 +30,7 @@ class Invites extends Type
 			$variables->items = [];
 		}
 
+		$class->items = []; // replace raw items with class items
 		foreach ($variables->items as $itemRaw) {
 			$class->items[] = Invite::createFromVariable($itemRaw);
 		}
