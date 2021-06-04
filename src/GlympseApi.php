@@ -4,7 +4,9 @@ namespace DJTommek\GlympseApi;
 
 use DJTommek\GlympseApi\Types\AccessToken;
 use DJTommek\GlympseApi\Types\Account;
+use DJTommek\GlympseApi\Types\Invite;
 use DJTommek\GlympseApi\Types\Invites;
+use DJTommek\GlympseApi\Types\Ticket;
 use DJTommek\GlympseApi\Types\Tickets;
 
 class GlympseApi
@@ -92,7 +94,7 @@ class GlympseApi
 		return $this->requestClient->makePostRequest(Endpoint::USERS_SELF_CREATE_TICKET, $params, [], $this->accessToken->accessToken);
 	}
 
-	public function ticketsId(string $ticketId, bool $invites = null, bool $properties = null)
+	public function ticketsId(string $ticketId, bool $invites = null, bool $properties = null): Ticket
 	{
 		$params = [];
 		if ($invites) {
@@ -101,8 +103,9 @@ class GlympseApi
 		if ($properties) {
 			$params['properties'] = Utils::stringify($properties);
 		}
-		$endpoint = sprintf(Endpoint::TICKETS_ID_UPDATE, $ticketId);
-		return $this->requestClient->makeGetRequest($endpoint, $params, $this->accessToken->accessToken);
+		$endpoint = sprintf(Endpoint::TICKETS_ID, $ticketId);
+		$response = $this->requestClient->makeGetRequest($endpoint, $params, $this->accessToken->accessToken);
+		return Ticket::createFromVariable($response);
 	}
 
 	/**
@@ -158,7 +161,7 @@ class GlympseApi
 		string $send = null,
 		string $requestId = null,
 		string $data = null
-	)
+	): Invite
 	{
 		$params = [
 			'type' => $type
@@ -188,7 +191,8 @@ class GlympseApi
 			$params['data'] = $data;
 		}
 		$endpoint = sprintf(Endpoint::TICKETS_ID_CREATE_INVITE, $ticketId);
-		return $this->requestClient->makePostRequest($endpoint, $params, [], $this->accessToken->accessToken);
+		$response = $this->requestClient->makePostRequest($endpoint, $params, [], $this->accessToken->accessToken);
+		return Invite::createFromVariable($response);
 	}
 
 	public function ticketsIdAppendLocation(
