@@ -222,6 +222,36 @@ class GlympseApi
 	}
 
 	/**
+	 * Adds property data to a ticket.
+	 * @link https://developer.glympse.com/docs/core/api/reference/tickets/id/append_data/post
+	 *
+	 * @param string $ticketId
+	 * @param \DateTimeInterface $epochTime Time associated with the property change; can influence ticket behavior, depending on the ${property_name}.
+	 * @param string $name The specific property you're updating. List of available properties: https://developer.glympse.com/docs/core/api/reference/objects/data-points#properties
+	 * @param mixed $value data appropriate for a property with the given name.
+	 * @param int|null $partnerId Partner ID, typically optional; contact your Glympse representative to learn more.
+	 */
+	public function ticketsIdAppendData(
+		string $ticketId,
+		\DateTimeInterface $epochTime,
+		string $name,
+		$value,
+		?int $partnerId = null
+	)
+	{
+		$params = [
+			't' => $epochTime->getTimestamp() * 1000, // in milliseconds
+			'n' => $name,
+			'v' => Utils::stringify($value),
+		];
+		if (is_null($partnerId) === false) {
+			$params['pid'] = $partnerId;
+		}
+		$endpoint = sprintf(Endpoint::TICKETS_ID_APPEND_DATA, $ticketId);
+		return $this->requestClient->makePostRequest($endpoint, [], json_encode([$params]), $this->accessToken->accessToken);
+	}
+
+	/**
 	 * Returns a list of invites created by the user.
 	 *
 	 * @param ?int $since Returns the invites that have been viewed since the specified Epoch time in milliseconds. To see all invites created by a user, set since to zero (0). @TODO change to DateTimeImmutable
