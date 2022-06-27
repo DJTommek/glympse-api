@@ -289,13 +289,36 @@ class GlympseApi
 	 * The endpoint to determine type of the item that originally created the invite (ticket, request, etc.) and to retrieve location data and properties for the specified ticket invite.
 	 *
 	 * @param string $code Invite code
+	 * @param ?int $next Integer specifying a sequence number.
+	 * @param ?int $limit This integer supports just one value: 0, which removes location data from the response.
+	 * @param ?bool $fullTrail When true, this returns the complete ticket location stream (does not trim it to the last 10 minutes); default: false.
+	 * @param ?bool $uncompressed When false (default), the response object returns location points in compressed form. When true, location points represent discrete locations.
 	 *
 	 * @see https://developer.glympse.com/docs/core/api/reference/invites/code/get
 	 */
-	public function invites(string $code): TicketInvite
+	public function invites(
+		string $code,
+		?int $next = null,
+		?int $limit = null,
+		?bool $fullTrail = null,
+		?bool $uncompressed = null
+	): TicketInvite
 	{
 		$endpoint = sprintf(Endpoint::INVITES_CODE, $code);
 		$params = [];
+		if (is_null($next) === false) {
+			$params['next'] = $next;
+		}
+		if (is_null($limit) === false) {
+			$params['limit'] = $limit;
+		}
+		if (is_null($fullTrail) === false) {
+			$params['full_trail'] = Utils::stringify($fullTrail);
+		}
+		if (is_null($uncompressed) === false) {
+			$params['uncompressed'] = Utils::stringify($uncompressed);
+		}
+
 		$response = $this->requestClient->makeGetRequest($endpoint, $params, $this->accessToken->accessToken);
 		return TicketInvite::createFromVariable($response);
 	}
