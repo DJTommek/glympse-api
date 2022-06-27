@@ -4,6 +4,7 @@ namespace DJTommek\GlympseApi;
 
 use DJTommek\GlympseApi\Types\AccessToken;
 use DJTommek\GlympseApi\Types\Account;
+use DJTommek\GlympseApi\Types\Group;
 use DJTommek\GlympseApi\Types\Invite;
 use DJTommek\GlympseApi\Types\Invites;
 use DJTommek\GlympseApi\Types\Ticket;
@@ -321,5 +322,20 @@ class GlympseApi
 
 		$response = $this->requestClient->makeGetRequest($endpoint, $params, $this->accessToken->accessToken);
 		return TicketInvite::createFromVariable($response);
+	}
+
+	/**
+	 * Get group details for the given group_name
+	 *
+	 * @param string $groupName The name of the requested group, not including the "!"
+	 *
+	 * @see https://developer.glympse.com/docs/core/api/reference/groups/groups
+	 */
+	public function groups(string $groupName): Group
+	{
+		$endpoint = sprintf(Endpoint::GROUPS_ID, ltrim($groupName, '!'));
+		$params = [];
+		$response = $this->requestClient->makeGetRequest($endpoint, $params, $this->accessToken->accessToken);
+		return Group::createFromVariable($response);
 	}
 }
