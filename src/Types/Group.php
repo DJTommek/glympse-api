@@ -11,7 +11,8 @@ use DJTommek\GlympseApi\Utils;
  */
 class Group extends Type
 {
-	public static function createFromVariable(\stdClass $variables): self {
+	public static function createFromVariable(\stdClass $variables): self
+	{
 		$class = new self();
 		foreach ($variables as $key => $value) {
 			$propertyName = Utils::camelize($key);
@@ -37,4 +38,7 @@ class Group extends Type
 	public $name = null;
 	/** @var ?string The branding identifier, if set, for the group */
 	public $branding = null;
+
+	/** @var ?bool @TODO Not documented */
+	public $notify = null;
 }
