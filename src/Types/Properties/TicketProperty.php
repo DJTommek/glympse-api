@@ -68,4 +68,6 @@ class TicketProperty extends Property
 
 	/** @var ?int *Not documented */
 	public $xoaMode = null;
+	/** @var ?bool *Not documented */
+	public $expired = null;
 }
