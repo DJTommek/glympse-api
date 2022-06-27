@@ -7,6 +7,7 @@ use DJTommek\GlympseApi\Types\Account;
 use DJTommek\GlympseApi\Types\Invite;
 use DJTommek\GlympseApi\Types\Invites;
 use DJTommek\GlympseApi\Types\Ticket;
+use DJTommek\GlympseApi\Types\TicketInvite;
 use DJTommek\GlympseApi\Types\Tickets;
 
 class GlympseApi
@@ -284,4 +285,18 @@ class GlympseApi
 		return Invites::createFromVariable($response);
 	}
 
+	/**
+	 * The endpoint to determine type of the item that originally created the invite (ticket, request, etc.) and to retrieve location data and properties for the specified ticket invite.
+	 *
+	 * @param string $code Invite code
+	 *
+	 * @see https://developer.glympse.com/docs/core/api/reference/invites/code/get
+	 */
+	public function invites(string $code): TicketInvite
+	{
+		$endpoint = sprintf(Endpoint::INVITES_CODE, $code);
+		$params = [];
+		$response = $this->requestClient->makeGetRequest($endpoint, $params, $this->accessToken->accessToken);
+		return TicketInvite::createFromVariable($response);
+	}
 }
