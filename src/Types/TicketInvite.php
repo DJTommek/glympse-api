@@ -52,6 +52,15 @@ class TicketInvite extends Type
 	/** @var ?bool @TODO Not documented */
 	public $uncompressed = null;
 
+	/** @var ?string @TODO Not documented */
+	public $owner = null;
+
+	/** @var ?string @TODO Not documented */
+	public $ticketDeviceId = null;
+
+	/** @var ?string @TODO Not documented */
+	public $url = null;
+
 	/**
 	 * @var TicketProperty Latest values of all ticket properties.
 	 * @see https://developer.glympse.com/docs/core/api/reference/objects/data-points
