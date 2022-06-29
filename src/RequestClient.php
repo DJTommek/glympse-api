@@ -13,6 +13,7 @@ class RequestClient
 	 * @param string|null $authorization
 	 * @return mixed
 	 * @throws \JsonException
+	 * @throws GlympseApiException
 	 */
 	public function makePostRequest(string $path, array $queryParams, $body = [], ?string $authorization = null)
 	{
@@ -35,11 +36,15 @@ class RequestClient
 		if ($content->result === 'ok') {
 			return $content->response;
 		} else {
-			throw new \Exception($content->meta->error_detail ?? $content->meta->error);
+			throw new GlympseApiException($content->meta->error_detail ?? $content->meta->error);
 		}
 	}
 
-	public function makeGetRequest(string $path, array $queryParams, ?string $authorization = null)
+	/**
+	 * @throws \JsonException
+	 * @throws GlympseApiException
+	 */
+	public function makeGetRequest(string $path, array $queryParams, ?string $authorization = null): \stdClass
 	{
 		$url = sprintf('%s%s?%s', self::API_URL, $path, http_build_query($queryParams));
 		$headers = [
@@ -55,7 +60,7 @@ class RequestClient
 		if ($content->result === 'ok') {
 			return $content->response;
 		} else {
-			throw new \Exception($content->meta->error_detail ?? $content->meta->error);
+			throw new GlympseApiException($content->meta->error_detail ?? $content->meta->error);
 		}
 	}
 }
