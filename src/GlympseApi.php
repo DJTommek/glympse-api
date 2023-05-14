@@ -144,6 +144,10 @@ class GlympseApi
 		return Tickets::createFromVariable($response);
 	}
 
+	/**
+	 * @param string $ticketId The ID representing the ticket.
+	 * @param int $duration Updates the remaining lifetime of the ticket, in milliseconds. Limited to 14400000 (four hours).
+	 */
 	public function ticketsIdUpdate(string $ticketId, int $duration)
 	{
 		$params = [
