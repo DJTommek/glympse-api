@@ -19,7 +19,8 @@ class Ticket extends Type
 	const ARCHIVED = 'archived';
 	const EXPIRED = 'expired';
 
-	public static function createFromVariable(\stdClass $variables): self {
+	public static function createFromVariable(\stdClass $variables): self
+	{
 		$class = new Ticket();
 		foreach ($variables as $key => $value) {
 			$propertyName = Utils::camelize($key);
@@ -50,17 +51,19 @@ class Ticket extends Type
 	/** @var ?string */
 	public $owner = null;
 
-	/** @var array */
-	public $invites = [];
+	/** @var ?Invites */
+	public $invites = null;
 
 	/** @var TicketProperty */
 	public $properties = null;
 
-	public function isActive(): bool {
+	public function isActive(): bool
+	{
 		return $this->state === self::ACTIVE;
 	}
 
-	public function hasInvites(): bool {
-		return $this->invites !== [];
+	public function hasInvites(): bool
+	{
+		return $this->invites !== null && $this->invites->items !== [];
 	}
 }
