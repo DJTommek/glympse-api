@@ -88,12 +88,13 @@ class GlympseApi
 		return AccessToken::createFromVariable($response);
 	}
 
-	public function usersSelfCreateTicket(int $duration)
+	public function usersSelfCreateTicket(int $duration): Ticket
 	{
 		$params = [
 			'duration' => $duration,
 		];
-		return $this->requestClient->makePostRequest(Endpoint::USERS_SELF_CREATE_TICKET, $params, [], $this->accessToken->accessToken);
+		$response = $this->requestClient->makePostRequest(Endpoint::USERS_SELF_CREATE_TICKET, $params, [], $this->accessToken->accessToken);
+		return Ticket::createFromVariable($response);
 	}
 
 	public function ticketsId(string $ticketId, bool $invites = null, bool $properties = null): Ticket
