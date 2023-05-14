@@ -36,7 +36,7 @@ class RequestClient
 		if ($content->result === 'ok') {
 			return $content->response;
 		} else {
-			throw new GlympseApiException($content->meta->error_detail ?? $content->meta->error);
+			throw new GlympseApiException($content->meta);
 		}
 	}
 
@@ -60,7 +60,7 @@ class RequestClient
 		if ($content->result === 'ok') {
 			return $content->response;
 		} else {
-			throw new GlympseApiException($content->meta->error_detail ?? $content->meta->error);
+			throw new GlympseApiException($content->meta);
 		}
 	}
 }
