@@ -96,4 +96,7 @@ class Invite extends Type
 
 	/** @var ?\DateTimeImmutable @TODO missing in documentation (example 1622816894940) */
 	public $lastView = null;
+
+	/** @var ?\stdClass @TODO missing in documentation (example is empty stdClass: {}) */
+	public $theme = null;
 }
