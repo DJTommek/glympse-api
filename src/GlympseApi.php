@@ -55,7 +55,7 @@ class GlympseApi
 		$this->apiPassword = $password;
 	}
 
-	public function accountCreate(string $type = null, string $address = null, string $code = null): Account
+	public function accountCreate(?string $type = null, ?string $address = null, ?string $code = null): Account
 	{
 		$params = [
 			'api_key' => $this->apiKey,
@@ -74,7 +74,7 @@ class GlympseApi
 	/**
 	 * @param ?string $device Unique device id for this physical device
 	 */
-	public function accountLogin(string $device = null): AccessToken
+	public function accountLogin(?string $device = null): AccessToken
 	{
 		$params = [
 			'api_key' => $this->apiKey,
@@ -97,7 +97,7 @@ class GlympseApi
 		return Ticket::createFromVariable($response);
 	}
 
-	public function ticketsId(string $ticketId, bool $invites = null, bool $properties = null): Ticket
+	public function ticketsId(string $ticketId, ?bool $invites = null, ?bool $properties = null): Ticket
 	{
 		$params = [];
 		if ($invites) {
@@ -119,7 +119,7 @@ class GlympseApi
 	 * @param ?\DateTimeInterface $minEndTime Results are limited to those ending after the specified Epoch time.
 	 * @param ?int $limit Limits the response to the number specified as the value.
 	 */
-	public function usersSelfTickets(bool $invites = null, bool $properties = null, bool $siblings = null, string $state = null, \DateTimeInterface $minEndTime = null, int $limit = null): Tickets
+	public function usersSelfTickets(?bool $invites = null, ?bool $properties = null, ?bool $siblings = null, ?string $state = null, ?\DateTimeInterface $minEndTime = null, ?int $limit = null): Tickets
 	{
 		$params = [];
 		if (is_null($invites) === false) {
@@ -160,14 +160,14 @@ class GlympseApi
 	public function ticketsIdCreateInvite(
 		string $ticketId,
 		string $type,
-		string $subtype = null,
-		string $address = null,
-		string $visible = null,
-		string $name = null,
-		string $text = null,
-		string $send = null,
-		string $requestId = null,
-		string $data = null
+		?string $subtype = null,
+		?string $address = null,
+		?string $visible = null,
+		?string $name = null,
+		?string $text = null,
+		?string $send = null,
+		?string $requestId = null,
+		?string $data = null
 	): Invite
 	{
 		$params = [
@@ -207,11 +207,11 @@ class GlympseApi
 		\DateTimeInterface $epochTime,
 		float $langtitude,
 		float $longtitude,
-		float $speed = null,
-		int $heading = null,
-		int $elevation = null,
-		int $horizontalAccuracy = null,
-		int $verticalAccuracy = null
+		?float $speed = null,
+		?int $heading = null,
+		?int $elevation = null,
+		?int $horizontalAccuracy = null,
+		?int $verticalAccuracy = null
 	)
 	{
 		$params = [
@@ -269,7 +269,7 @@ class GlympseApi
 	 *
 	 * @see https://developer.glympse.com/docs/core/api/reference/users/self/invites/get
 	 */
-	public function usersSelfInvites(int $since = null, bool $onlyViews = null, bool $expired = null, bool $siblings = null, bool $viewers = null): Invites
+	public function usersSelfInvites(?int $since = null, ?bool $onlyViews = null, ?bool $expired = null, ?bool $siblings = null, ?bool $viewers = null): Invites
 	{
 		$params = [];
 		if (is_null($since) === false) {
