@@ -32,7 +32,7 @@ class Account extends Type
 
 	public static function createFromVariable(\stdClass $variables): self {
 		$class = new self();
-		foreach ($variables as $key => $value) {
+		foreach ((array)$variables as $key => $value) {
 			$propertyName = Utils::camelize($key);
 			if (in_array($propertyName, ['createdTime', 'lastModified'])) {
 				$value = DateImmutableUtils::fromTimestampMs($value);

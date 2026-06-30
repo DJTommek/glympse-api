@@ -13,9 +13,9 @@ class RouteProperty extends Property
 {
 	public static function createFromVariable(\stdClass $variables): self {
 		$class = new self();
-		foreach ($variables as $key => $value) {
+		foreach ((array)$variables as $key => $value) {
 			$name = Utils::camelize($key);
-			if (in_array($name, ['points'])) {
+			if ($name === 'points') {
 				$rawPoints = explode(' ', $value);
 				$rawFirstPoint = array_shift($rawPoints);
 				$firstPoint = new \stdClass(); // @TODO convert to class

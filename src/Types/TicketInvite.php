@@ -16,7 +16,7 @@ class TicketInvite extends Type
 {
 	public static function createFromVariable(\stdClass $variables): self {
 		$class = new TicketInvite();
-		foreach ($variables as $key => $value) {
+		foreach ((array)$variables as $key => $value) {
 			$propertyName = Utils::camelize($key);
 			// @TODO move properties to $this->property->{propertyName} instead of $this->property{PropertyName}
 			if ($key === 'properties') {
@@ -81,7 +81,8 @@ class TicketInvite extends Type
 		return end($this->location);
 	}
 
-	public function getInviteIdUrl() {
+	public function getInviteIdUrl(): string
+	{
 		return 'https://glympse.com/' . $this->id;
 	}
 }

@@ -1,0 +1,121 @@
+parameters:
+	ignoreErrors:
+		-
+			message: '#^Method DJTommek\\GlympseApi\\DateImmutableUtils\:\:fromTimestampMs\(\) has parameter \$timestampMs with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: src/DateImmutableUtils.php
+
+		-
+			message: '#^Cannot access property \$accessToken on DJTommek\\GlympseApi\\Types\\AccessToken\|null\.$#'
+			identifier: property.nonObject
+			count: 10
+			path: src/GlympseApi.php
+
+		-
+			message: '#^Method DJTommek\\GlympseApi\\GlympseApi\:\:setAccessToken\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: src/GlympseApi.php
+
+		-
+			message: '#^Method DJTommek\\GlympseApi\\GlympseApi\:\:setPassword\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: src/GlympseApi.php
+
+		-
+			message: '#^Method DJTommek\\GlympseApi\\GlympseApi\:\:setUsername\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: src/GlympseApi.php
+
+		-
+			message: '#^Method DJTommek\\GlympseApi\\GlympseApi\:\:ticketsIdAppendData\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: src/GlympseApi.php
+
+		-
+			message: '#^Method DJTommek\\GlympseApi\\GlympseApi\:\:ticketsIdAppendLocation\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: src/GlympseApi.php
+
+		-
+			message: '#^Method DJTommek\\GlympseApi\\GlympseApi\:\:ticketsIdUpdate\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: src/GlympseApi.php
+
+		-
+			message: '#^Parameter \#1 \$input of static method DJTommek\\GlympseApi\\Utils\:\:stringify\(\) expects bool\|string, DateTimeInterface given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/GlympseApi.php
+
+		-
+			message: '#^Parameter \#1 \$input of static method DJTommek\\GlympseApi\\Utils\:\:stringify\(\) expects bool\|string, int given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/GlympseApi.php
+
+		-
+			message: '#^Property DJTommek\\GlympseApi\\GlympseApi\:\:\$requestClient has no type specified\.$#'
+			identifier: missingType.property
+			count: 1
+			path: src/GlympseApi.php
+
+		-
+			message: '#^Call to function is_string\(\) with string will always evaluate to true\.$#'
+			identifier: function.alreadyNarrowedType
+			count: 1
+			path: src/RequestClient.php
+
+		-
+			message: '#^Method DJTommek\\GlympseApi\\RequestClient\:\:makeGetRequest\(\) has parameter \$queryParams with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/RequestClient.php
+
+		-
+			message: '#^Method DJTommek\\GlympseApi\\RequestClient\:\:makePostRequest\(\) has parameter \$queryParams with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/RequestClient.php
+
+		-
+			message: '#^Result of && is always false\.$#'
+			identifier: booleanAnd.alwaysFalse
+			count: 1
+			path: src/RequestClient.php
+
+		-
+			message: '#^Strict comparison using \=\=\= between true and false will always evaluate to false\.$#'
+			identifier: identical.alwaysFalse
+			count: 1
+			path: src/RequestClient.php
+
+		-
+			message: '#^Property DJTommek\\GlympseApi\\Types\\AccessToken\:\:\$type has no type specified\.$#'
+			identifier: missingType.property
+			count: 1
+			path: src/Types/AccessToken.php
+
+		-
+			message: '#^Method DJTommek\\GlympseApi\\Types\\LocationPoint\:\:createFromArray\(\) has parameter \$location with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Types/LocationPoint.php
+
+		-
+			message: '#^Binary operation "/" between non\-empty\-string and 50000000\.0 results in an error\.$#'
+			identifier: binaryOp.invalid
+			count: 2
+			path: src/Types/Properties/RouteProperty.php
+
+		-
+			message: '#^Property DJTommek\\GlympseApi\\Types\\Properties\\RouteProperty\:\:\$points type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Types/Properties/RouteProperty.php

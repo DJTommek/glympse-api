@@ -17,7 +17,7 @@ class Invites extends Type
 	public static function createFromVariable(\stdClass $variables): self
 	{
 		$class = new Invites();
-		foreach ($variables as $key => $value) {
+		foreach ((array)$variables as $key => $value) {
 			$propertyName = Utils::camelize($key);
 			if ($propertyName === 'lastRefresh') {
 				$value = DateImmutableUtils::fromTimestampMs($value);

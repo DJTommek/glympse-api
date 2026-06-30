@@ -12,8 +12,8 @@ use DJTommek\GlympseApi\Utils;
 class AppProperty extends Property
 {
 	public static function createFromVariable(\stdClass $variables): self {
-		$class = new static();
-		foreach ($variables as $key => $value) {
+		$class = new self();
+		foreach ((array)$variables as $key => $value) {
 			$propertyName = Utils::camelize($key);
 			$class->{$propertyName} = $value;
 		}

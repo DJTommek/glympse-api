@@ -22,7 +22,7 @@ class Ticket extends Type
 	public static function createFromVariable(\stdClass $variables): self
 	{
 		$class = new Ticket();
-		foreach ($variables as $key => $value) {
+		foreach ((array)$variables as $key => $value) {
 			$propertyName = Utils::camelize($key);
 			// @TODO move properties to $this->property->{propertyName} instead of $this->property{PropertyName}
 			if ($propertyName === 'properties') {

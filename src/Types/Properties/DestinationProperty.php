@@ -13,7 +13,7 @@ class DestinationProperty extends Property
 {
 	public static function createFromVariable(\stdClass $variables): self {
 		$class = new self();
-		foreach ($variables as $key => $value) {
+		foreach ((array)$variables as $key => $value) {
 			$propertyName = Utils::camelize($key);
 			if (in_array($propertyName, ['latitude', 'longtitude'])) {
 				$value = $value / 10e5; // according documentation it should be 10e6 but it seems to be wrong

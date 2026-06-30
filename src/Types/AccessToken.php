@@ -16,7 +16,7 @@ class AccessToken extends Type
 {
 	public static function createFromVariable(\stdClass $variables): self {
 		$class = new AccessToken();
-		foreach ($variables as $key => $value) {
+		foreach ((array)$variables as $key => $value) {
 			$propertyName = Utils::camelize($key);
 			if ($key === 'expires_in') {
 				$value = new \DateInterval(sprintf('PT%dS', $value));

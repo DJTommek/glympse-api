@@ -11,9 +11,8 @@ use DJTommek\GlympseApi\DateImmutableUtils;
  */
 class LocationPoint extends Type
 {
-
 	public static function createFromArray(array $location): self {
-		list($timestamp, $latitude, $longtitude, $speed, $heading, $elevation, $horizontalAccuracy, $verticalAccuracy) = array_pad($location, 8, null);
+		[$timestamp, $latitude, $longtitude, $speed, $heading, $elevation, $horizontalAccuracy, $verticalAccuracy] = array_pad($location, 8, null);
 
 		$class = new self();
 		$class->timestamp = DateImmutableUtils::fromTimestampMs($timestamp);
@@ -29,9 +28,9 @@ class LocationPoint extends Type
 
 	/** @var ?\DateTimeImmutable */
 	public $timestamp = null;
-	/** @var ?int */
+	/** @var int|float|null */
 	public $latitude = null;
-	/** @var ?int */
+	/** @var int|float|null */
 	public $longtitude = null;
 	/** @var ?int */
 	public $speed = null;

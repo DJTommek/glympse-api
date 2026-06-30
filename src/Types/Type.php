@@ -4,7 +4,10 @@ namespace DJTommek\GlympseApi\Types;
 
 abstract class Type
 {
-	public function __set($name, $value)
+	/**
+	 * @param mixed $value
+	 */
+	public function __set(string $name, $value): void
 	{
 		trigger_error(sprintf(
 			'Property "%s::$%s" of type "%s" is not predefined. Please report it on https://github.com/DJTommek/glympse-api',

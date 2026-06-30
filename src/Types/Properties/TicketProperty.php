@@ -12,6 +12,9 @@ use DJTommek\GlympseApi\Utils;
  */
 class TicketProperty extends Property
 {
+	/**
+	 * @param array<non-empty-string, mixed> $properties
+	 */
 	public static function createFromArray(array $properties): self {
 		$class = new self();
 		foreach ($properties as $property) {

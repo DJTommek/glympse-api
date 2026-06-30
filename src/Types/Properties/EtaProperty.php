@@ -14,11 +14,11 @@ class EtaProperty extends Property
 {
 	public static function createFromVariable(\stdClass $variables): self {
 		$class = new self();
-		foreach ($variables as $key => $value) {
+		foreach ((array)$variables as $key => $value) {
 			$name = Utils::camelize($key);
-			if (in_array($name, ['eta'])) {
+			if ($name === 'eta') {
 				$value = new \DateInterval(sprintf('PT%dS', $value / 1000));
-			} else if (in_array($name, ['etaTs'])) {
+			} else if ($name === 'etaTs') {
 				$value = DateImmutableUtils::fromTimestampMs($value);
 			}
 			$class->{$name} = $value;

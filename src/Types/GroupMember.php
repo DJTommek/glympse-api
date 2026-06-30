@@ -11,18 +11,9 @@ use DJTommek\GlympseApi\Utils;
  */
 class GroupMember extends Type
 {
-	/** @return self[] */
-	public static function createMultiple(array $members): array {
-		$result = [];
-		foreach ($members as $rawMember) {
-			$result[] = self::createFromVariable($rawMember);
-		}
-		return $result;
-	}
-
 	public static function createFromVariable(\stdClass $variables): self {
 		$class = new self();
-		foreach ($variables as $key => $value) {
+		foreach ((array)$variables as $key => $value) {
 			$propertyName = Utils::camelize($key);
 			$class->{$propertyName} = $value;
 		}
