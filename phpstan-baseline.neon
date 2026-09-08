@@ -119,3 +119,9 @@ parameters:
 			identifier: missingType.iterableValue
 			count: 1
 			path: src/Types/Properties/RouteProperty.php
+
+		-
+			message: '#^Parameter \#1 \$handle of function curl_getinfo expects resource, resource given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/Utils.php

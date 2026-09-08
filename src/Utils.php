@@ -29,7 +29,7 @@ class Utils
 			throw new \Exception(sprintf('CURL request error %s: "%s"', $curlErrno, curl_error($curl)));
 		}
 		$curlInfo = curl_getinfo($curl);
-		list($header, $body) = explode("\r\n\r\n", $curlResponse, 2);
+		[$header, $body] = explode("\r\n\r\n", $curlResponse, 2);
 		if ($curlInfo['http_code'] >= 500) {
 			throw new \Exception(sprintf('Page responded with HTTP code %d: Text response: "%s"', $curlInfo['http_code'], $body));
 		}

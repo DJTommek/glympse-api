@@ -9,9 +9,7 @@ class DateImmutableUtils
 	}
 
 	public static function fromTimestamp(int $timestamp, ?\DateTimeZone $timezone = null): \DateTimeImmutable {
-		if (is_null($timezone)) {
-			$timezone = new \DateTimeZone(date_default_timezone_get());
-		}
+		$timezone ??= new \DateTimeZone(date_default_timezone_get());
 		return (new \DateTimeImmutable())->setTimestamp($timestamp)->setTimezone($timezone);
 	}
 }
